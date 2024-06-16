@@ -1,0 +1,27 @@
+name: Pull Request Labels
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+jobs:
+  debug-artifacts:
+    name: Debug Artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug Artifacts
+        uses: mheap/debug-artifact@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  label:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: mheap/github-action-required-labels@v5
+        with:
+          mode: exactly
+          count: 1
+          labels: |
+            semver:patch
+            semver:minor
+            semver:major
