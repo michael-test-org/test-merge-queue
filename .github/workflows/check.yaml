@@ -2,6 +2,7 @@ name: Pull Request Labels
 on:
   pull_request:
     types: [opened, labeled, unlabeled, synchronize]
+  merge_group:
 jobs:
   debug-artifacts:
     name: Debug Artifacts
